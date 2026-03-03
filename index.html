@@ -20,6 +20,7 @@
     <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
         .chart-container {
             position: relative;
@@ -43,88 +44,103 @@
             overflow: hidden;
             transition: max-height 0.5s ease-in-out;
         }
+        /* 優化手機閱讀：避免兩端對齊在字數少時產生奇怪間距 */
+        .readable-text {
+            text-align: left;
+            word-break: break-all;
+        }
+        @media (min-width: 640px) {
+            .readable-text {
+                text-align: justify;
+            }
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
 
     <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-5xl">
 
-        <!-- 手機專用標頭 (Mobile Header - 僅在小螢幕顯示) -->
+        <!-- 手機專用標頭 (Mobile Header) -->
         <header class="block md:hidden text-center py-6 mb-8 border-b-2 border-slate-200/60">
-            <p class="text-sm font-bold text-slate-500 mb-2 tracking-widest">花蓮縣玉里地政事務所</p>
-            <h1 class="text-2xl sm:text-3xl font-bold text-cyan-800 leading-snug">
-                USB儲存媒體<br>資訊安全互動指南
+            <p class="text-xs font-bold text-slate-400 mb-2 tracking-[0.2em]">花蓮縣玉里地政事務所</p>
+            <h1 class="text-2xl sm:text-3xl font-bold text-cyan-800 leading-snug px-4">
+                USB儲存媒體<br><span class="text-cyan-600">資訊安全</span>互動指南
             </h1>
         </header>
 
-        <!-- 電腦版標頭 (Desktop Header - 僅在中大螢幕顯示) -->
+        <!-- 電腦版標頭 (Desktop Header) -->
         <header class="hidden md:flex flex-col items-center justify-center py-10 mb-6 space-y-6">
-
          <!-- Logo -->
          <img src="https://ws.hl.gov.tw/001/Upload/404/sites/pagebackimage/fff729bd-7167-4ee5-a6b9-98742ea754ce.gif"
          alt="花蓮縣玉里地政事務所"
          class="h-24 w-auto object-contain">
-
          <!-- 主標題 -->
          <h1 class="text-4xl lg:text-5xl font-bold text-cyan-800 tracking-tight text-center leading-snug">
              USB儲存媒體資訊安全互動指南
          </h1>
-
         </header>
 
         <main>
             <!-- Introduction Section -->
-            <section id="intro" class="mb-10 md:mb-16 bg-white p-5 sm:p-6 md:p-8 rounded-xl shadow-sm">
-                <h2 class="text-xl sm:text-2xl font-bold text-cyan-700 mb-4">便利背後的資安風險</h2>
-                <p class="text-slate-600 leading-relaxed text-justify sm:text-left">
-                    在今日高度數位化的環境中，USB隨身碟與隨身硬碟已成為我們不可或缺的工具。然而，這份便利的背後，卻隱藏著經常被忽視的資訊安全風險。本指南將透過互動方式，帶您了解最關鍵的防護措施——「預先清空或格式化」，以及為何這個簡單動作是保護您資訊安全的第一道防線。
+            <section id="intro" class="mb-10 md:mb-16 bg-white p-5 sm:p-8 rounded-xl shadow-sm border-l-4 border-cyan-600">
+                <h2 class="text-xl sm:text-2xl font-bold text-cyan-700 mb-4 flex items-center">
+                    <span class="mr-2">💡</span>便利背後的資安風險
+                </h2>
+                <p class="text-slate-600 leading-relaxed readable-text text-[1.05rem]">
+                    在今日高度數位化的環境中，USB 隨身碟已成為不可或缺的工具。然而，這份便利背後隱藏著經常被忽視的風險。本指南將帶您了解關鍵防護措施：<span class="text-cyan-800 font-bold">「預先格式化」</span>，這是保護資訊安全的<span class="underline decoration-cyan-300 underline-offset-4">第一道防線</span>。
                 </p>
             </section>
 
             <!-- Risks Section -->
             <section id="risks" class="mb-12 md:mb-16">
-                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 md:mb-8">三大核心風險：看不見的危機</h2>
-                <p class="text-center text-slate-500 mb-8 md:mb-10 max-w-3xl mx-auto px-2">當您在使用一支已用過的USB，您可能面臨以下威脅。點擊下方的卡片來深入了解每個風險。</p>
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 md:mb-8 text-slate-800">三大核心風險：看不見的危機</h2>
+                <p class="text-center text-slate-500 mb-8 md:mb-10 max-w-2xl mx-auto px-4 text-sm sm:text-base">
+                    當您使用一支來源不明或已用過的 USB，可能面臨以下威脅。請點擊卡片查看細節。
+                </p>
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-6">
-                    <div id="risk-card-1" class="content-card border-2 border-slate-200 bg-white p-5 md:p-6 rounded-xl cursor-pointer hover:shadow-lg hover:border-cyan-500 active:scale-95 sm:active:scale-100">
+                    <div id="risk-card-1" class="content-card border-2 border-slate-200 bg-white p-5 md:p-6 rounded-xl cursor-pointer hover:shadow-lg hover:border-cyan-500 active:bg-cyan-50 transition-all">
                         <h3 class="text-lg md:text-xl font-bold text-cyan-800 mb-2">🦠 惡意軟體潛伏</h3>
-                        <p class="text-slate-500 text-sm md:text-base">病毒、木馬、勒索軟體的溫床。</p>
+                        <p class="text-slate-500 text-sm md:text-base">病毒與勒索軟體的溫床</p>
                     </div>
-                    <div id="risk-card-2" class="content-card border-2 border-slate-200 bg-white p-5 md:p-6 rounded-xl cursor-pointer hover:shadow-lg hover:border-cyan-500 active:scale-95 sm:active:scale-100">
+                    <div id="risk-card-2" class="content-card border-2 border-slate-200 bg-white p-5 md:p-6 rounded-xl cursor-pointer hover:shadow-lg hover:border-cyan-500 active:bg-cyan-50 transition-all">
                         <h3 class="text-lg md:text-xl font-bold text-cyan-800 mb-2">📄 殘留資料洩密</h3>
-                        <p class="text-slate-500 text-sm md:text-base">被刪除的檔案可能被輕易還原。</p>
+                        <p class="text-slate-500 text-sm md:text-base">刪除不等於真正消失</p>
                     </div>
-                    <div id="risk-card-3" class="content-card border-2 border-slate-200 bg-white p-5 md:p-6 rounded-xl cursor-pointer hover:shadow-lg hover:border-cyan-500 active:scale-95 sm:active:scale-100 sm:col-span-2 md:col-span-1">
+                    <div id="risk-card-3" class="content-card border-2 border-slate-200 bg-white p-5 md:p-6 rounded-xl cursor-pointer hover:shadow-lg hover:border-cyan-500 active:bg-cyan-50 transition-all sm:col-span-2 md:col-span-1">
                         <h3 class="text-lg md:text-xl font-bold text-cyan-800 mb-2">🤖 韌體層級攻擊</h3>
-                        <p class="text-slate-500 text-sm md:text-base">USB被偽裝成鍵盤，自動執行指令。</p>
+                        <p class="text-slate-500 text-sm md:text-base">硬體偽裝，防不勝防</p>
                     </div>
                 </div>
 
-                <div id="risk-details" class="bg-white p-6 rounded-xl shadow-inner min-h-[150px] flex items-center justify-center transition-opacity duration-300">
-                    <p class="text-slate-500 text-center">點擊上方任一風險主題以查看詳細說明。</p>
+                <div id="risk-details" class="bg-white p-6 sm:p-8 rounded-xl shadow-inner min-h-[160px] border border-slate-100 transition-all duration-300">
+                    <div class="text-slate-400 text-center flex flex-col items-center">
+                        <svg class="w-12 h-12 mb-2 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <p>點擊上方任一風險主題以查看詳細說明</p>
+                    </div>
                 </div>
             </section>
 
             <!-- Formatting Section -->
             <section id="formatting" class="mb-12 md:mb-16">
-                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4">關鍵解決方案：如何正確清空USB</h2>
-                <p class="text-center text-slate-500 mb-8 md:mb-10 max-w-3xl mx-auto px-2">不同的清除方式，安全性天差地遠。下方的圖表比較了三種方法的安全等級。點擊按鈕查看它們的具體差異。</p>
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4">關鍵解決方案：正確清空 USB</h2>
+                <p class="text-center text-slate-500 mb-8 md:mb-10 max-w-3xl mx-auto px-4 text-sm">
+                    不同的清除方式，安全性天差地遠。養成習慣，保護資產。
+                </p>
 
-                <div class="bg-white p-4 sm:p-6 md:p-8 rounded-xl shadow-sm">
+                <div class="bg-white p-4 sm:p-8 rounded-xl shadow-sm border border-slate-100">
                     <div class="chart-container mb-8">
                         <canvas id="formatChart"></canvas>
                     </div>
 
-                    <!-- 響應式按鈕群組：手機上垂直排列全寬，平板以上水平排列 -->
-                    <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 mb-6">
-                        <button id="format-btn-1" class="format-btn w-full sm:w-auto bg-slate-200 text-slate-700 font-semibold py-3 sm:py-2 px-4 rounded-lg hover:bg-slate-300 transition focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-1">手動刪除檔案</button>
-                        <button id="format-btn-2" class="format-btn w-full sm:w-auto bg-slate-200 text-slate-700 font-semibold py-3 sm:py-2 px-4 rounded-lg hover:bg-slate-300 transition focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-1">快速格式化</button>
-                        <button id="format-btn-3" class="format-btn w-full sm:w-auto bg-cyan-600 text-white font-semibold py-3 sm:py-2 px-4 rounded-lg hover:bg-cyan-700 transition focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-1">完整格式化</button>
+                    <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 mb-8">
+                        <button id="format-btn-1" class="format-btn w-full sm:w-auto bg-slate-100 text-slate-600 font-bold py-3 px-6 rounded-full hover:bg-slate-200 transition-all">手動刪除</button>
+                        <button id="format-btn-2" class="format-btn w-full sm:w-auto bg-slate-100 text-slate-600 font-bold py-3 px-6 rounded-full hover:bg-slate-200 transition-all">快速格式化</button>
+                        <button id="format-btn-3" class="format-btn w-full sm:w-auto bg-cyan-600 text-white font-bold py-3 px-6 rounded-full hover:bg-cyan-700 shadow-md transition-all">完整格式化</button>
                     </div>
 
-                    <div id="format-details" class="bg-slate-100 p-5 sm:p-6 rounded-lg shadow-inner min-h-[150px]">
-                        <!-- Details will be injected here -->
+                    <div id="format-details" class="bg-slate-50 p-6 rounded-xl border border-slate-200 min-h-[140px]">
+                        <!-- Details injected here -->
                     </div>
                 </div>
             </section>
@@ -132,20 +148,24 @@
             <!-- Rules Section -->
             <section id="rules" class="mb-12 md:mb-16">
                 <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 md:mb-8">四大安全守則：建立良好習慣</h2>
-                <p class="text-center text-slate-500 mb-8 md:mb-10 max-w-3xl mx-auto px-2">除了格式化，遵循以下守則能更全面地保護您的資訊安全。點擊各項守則以展開說明。</p>
+                <p class="text-center text-slate-500 mb-8 md:mb-10 max-w-3xl mx-auto px-4 text-sm">
+                    除格式化外，請遵循以下日常守則。
+                </p>
                 
                 <div id="accordion-container" class="space-y-3 sm:space-y-4">
-                    <!-- Accordion items will be injected here -->
+                    <!-- Accordion items injected here -->
                 </div>
             </section>
 
         </main>
 
         <!-- Footer -->
-        <footer class="text-center py-8 mt-4 md:mt-8 border-t border-slate-200">
-            <h3 class="text-lg md:text-xl font-bold text-cyan-800 mb-4">結論：零信任，始於格式化</h3>
-            <p class="text-slate-600 max-w-3xl mx-auto px-4 text-justify sm:text-center">
-                永遠不要假設一支USB是乾淨的。養成「先格式化，再使用」的習慣，是成本最低、效益最高的資安投資。資訊安全，始於您插入USB前的那一個深思熟慮的決定。
+        <footer class="text-center py-10 mt-8 border-t border-slate-200">
+            <div class="inline-block bg-cyan-50 px-6 py-2 rounded-full mb-4">
+                <span class="text-cyan-800 font-bold text-sm md:text-base">💡 結論：零信任，始於格式化</span>
+            </div>
+            <p class="text-slate-500 max-w-2xl mx-auto px-4 leading-relaxed readable-text text-sm sm:text-base">
+                永遠不要假設 USB 是乾淨的。養成<span class="text-slate-800 font-bold">「先格式化，再使用」</span>的習慣，是效益最高的資安投資。
             </p>
         </footer>
     </div>
@@ -155,40 +175,40 @@
             
             const riskData = {
                 "risk-1": {
-                    title: "🦠 惡意軟體的潛伏與擴散",
-                    content: "這是最常見也最危險的威脅。惡意程式（如病毒、勒索軟體）可以偽裝成任何檔案，甚至隱藏起來。當您在電腦上插入受感染的USB並點擊檔案，都可能觸發惡意軟體，使其感染您的電腦，進而竊取密碼、加密檔案，甚至攻擊整個內部網路。"
+                    title: "🦠 惡意軟體潛伏與擴散",
+                    content: "這是最常見的威脅。惡意程式（如病毒、勒索軟體）可以偽裝成任何檔案。插入受感染的 USB 後，程式可能在背景<span class='text-cyan-800 font-bold'>自動執行</span>，進而感染電腦、竊取密碼或加密您的檔案。"
                 },
                 "risk-2": {
                     title: "📄 殘留資料的洩密風險",
-                    content: "按下「刪除」鍵不代表檔案永遠消失。它只是將檔案的「索引」移除，實際資料仍然存在。駭客或有心人士能輕易使用資料救援軟體，將這些被「刪除」的檔案完整還原，導致個人隱私或公司機密外洩。"
+                    content: "按下「刪除」不代表資料消失，只是移除索引。有心人士能輕易使用<span class='text-cyan-800 font-bold'>救援軟體</span>還原檔案。若該 USB 曾存過機密公文或私人照片，將面臨外洩風險。"
                 },
                 "risk-3": {
-                    title: "🤖 韌體層級的攻擊 (BadUSB)",
-                    content: "這是一種高階且隱蔽的攻擊。攻擊者可修改USB的韌體，使其在插入電腦時被偽裝成鍵盤等設備。接著，它就能在背景自動執行惡意指令，如下載病毒或破壞系統，而使用者完全無法察覺。單純刪除檔案對此完全無效。"
+                    title: "🤖 韌體層級攻擊 (BadUSB)",
+                    content: "高階且隱蔽的攻擊方式。攻擊者修改 USB 內部的<span class='text-cyan-800 font-bold'>控制晶片</span>，使其被電腦誤認為鍵盤，進而自動輸入指令下載病毒。單純刪除檔案對此完全無效。"
                 }
             };
 
             const formatData = {
                 "format-1": {
-                    title: "手動刪除檔案：<span class='text-red-600 font-bold'>極度不安全</span>",
-                    content: "如前所述，這只是假性刪除，僅移除檔案索引，實際資料仍可輕易被專業軟體還原。這是最不可靠的作法。"
+                    title: "手動刪除：<span class='text-red-500'>風險最高</span>",
+                    content: "僅移除路徑標記，<span class='text-slate-800 font-bold'>資料本體仍留在磁區上</span>。對病毒與隱藏檔幾乎沒有防護力，極易被救援復原。"
                 },
                 "format-2": {
-                    title: "快速格式化：<span class='text-orange-500 font-bold'>相對不安全</span>",
-                    content: "此操作同樣只清除檔案索引表，並未真正清除資料。雖然比手動刪除好一些，但資料仍有極高機率被還原，不建議用於處理機敏資料。"
+                    title: "快速格式化：<span class='text-orange-500'>中度風險</span>",
+                    content: "重置檔案系統表，速度快但<span class='text-slate-800 font-bold'>不抹除磁區數據</span>。雖然能清除部分病毒，但專業軟體仍能找回大部分原始資料。"
                 },
                 "format-3": {
-                    title: "完整格式化：<span class='text-green-600 font-bold'>推薦的安全選項</span>",
-                    content: "完整格式化會對儲存媒體的每一個磁區進行寫入測試（通常是寫入零），徹底清除原有的殘留資料。雖然花費時間較長，但這是確保資料無法被輕易還原的最有效方法。"
+                    title: "完整格式化：<span class='text-green-600'>最推薦方案</span>",
+                    content: "系統會逐一檢查磁區並<span class='text-slate-800 font-bold'>覆寫為零</span>，確保舊資料無法復原。雖耗時較長，卻是清除潛伏威脅最徹底的方法。"
                 }
             };
 
             const rulesData = [
-                { title: "來源不明，絕對不用", content: "不要使用任何來路不明的USB裝置，無論是在路上撿到的、或是陌生人提供的。這類裝置極有可能是惡意攻擊的誘餌。" },
-                { title: "公私分明，專碟專用", content: "盡量將工作用與私人用的USB儲存媒體分開，避免因私人使用不慎而將威脅帶入工作環境，反之亦然。" },
-                { title: "安裝並更新防毒軟體", content: "確保您的電腦安裝了信譽良好的防毒軟體，並隨時保持在最新版本。開啟防毒軟體的「即時掃描」功能，使其在USB裝置插入時自動進行偵測。" },
-                { title: "定期備份重要資料", content: "USB儲存媒體並非永久可靠，它們有使用壽命，也可能遺失或損壞。請務必將重要資料以「3-2-1原則」（至少三份備份、使用兩種不同媒介、其中一份異地存放）進行備份。" },
-                ];
+                { title: "來源不明，絕對不用", content: "路邊撿到或來路不明的贈品 USB 可能是攻擊誘餌。務必拒絕插入辦公電腦。" },
+                { title: "公私分明，專碟專用", content: "建議將公務與個人用 USB 分開。避免個人電腦的病毒透過 USB 帶回辦公環境。" },
+                { title: "防毒掃描，即時防護", content: "確保電腦防毒軟體為最新版本，並開啟「自動掃描 USB 裝置」功能。" },
+                { title: "定期備份，3-2-1 原則", content: "USB 屬易損品。重要資料應存放三份，使用兩種媒介，且其中一份需異地保存。" },
+            ];
 
             // Risk Section Logic
             const riskCards = document.querySelectorAll('.content-card');
@@ -196,8 +216,8 @@
             
             riskCards.forEach(card => {
                 card.addEventListener('click', () => {
-                    riskCards.forEach(c => c.classList.remove('border-cyan-500', 'shadow-lg'));
-                    card.classList.add('border-cyan-500', 'shadow-lg');
+                    riskCards.forEach(c => c.classList.remove('border-cyan-500', 'shadow-lg', 'bg-cyan-50'));
+                    card.classList.add('border-cyan-500', 'shadow-lg', 'bg-cyan-50');
                     
                     const riskId = card.id.replace('-card', '');
                     const data = riskData[riskId];
@@ -205,13 +225,14 @@
                     riskDetailsContainer.style.opacity = 0;
                     setTimeout(() => {
                         riskDetailsContainer.innerHTML = `
-                            <div class="text-left">
+                            <div class="text-left animate-fade-in">
+                                <p class="text-xs font-bold text-cyan-600 mb-1 uppercase tracking-wider">Risk Details</p>
                                 <h4 class="text-lg md:text-xl font-bold text-cyan-800 mb-3">${data.title}</h4>
-                                <p class="text-slate-600 leading-relaxed">${data.content}</p>
+                                <p class="text-slate-600 leading-relaxed readable-text">${data.content}</p>
                             </div>
                         `;
                         riskDetailsContainer.style.opacity = 1;
-                    }, 300);
+                    }, 200);
                 });
             });
 
@@ -222,16 +243,18 @@
             function updateFormatDetails(formatId) {
                 const data = formatData[formatId];
                 formatDetailsContainer.innerHTML = `
-                    <h4 class="text-base sm:text-lg font-bold mb-2">${data.title}</h4>
-                    <p class="text-slate-600 leading-relaxed text-sm sm:text-base">${data.content}</p>
+                    <div class="animate-fade-in">
+                        <h4 class="text-lg font-bold mb-2 text-slate-800">${data.title}</h4>
+                        <p class="text-slate-600 leading-relaxed text-sm sm:text-base">${data.content}</p>
+                    </div>
                 `;
                 formatBtns.forEach(b => {
-                    b.classList.remove('bg-cyan-600', 'text-white');
-                    b.classList.add('bg-slate-200', 'text-slate-700');
+                    b.classList.remove('bg-cyan-600', 'text-white', 'shadow-md');
+                    b.classList.add('bg-slate-100', 'text-slate-600');
                 });
                 const activeBtn = document.getElementById(formatId.replace('format', 'format-btn'));
-                activeBtn.classList.add('bg-cyan-600', 'text-white');
-                activeBtn.classList.remove('bg-slate-200', 'text-slate-700');
+                activeBtn.classList.add('bg-cyan-600', 'text-white', 'shadow-md');
+                activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
             }
 
             formatBtns.forEach(btn => {
@@ -241,7 +264,6 @@
                 });
             });
 
-            // Initial state for format section
             updateFormatDetails('format-3');
 
             // Chart.js Logic
@@ -251,19 +273,15 @@
                 data: {
                     labels: ['手動刪除', '快速格式化', '完整格式化'],
                     datasets: [{
-                        label: '安全等級',
+                        label: '安全評分',
                         data: [10, 30, 95],
                         backgroundColor: [
-                            'rgba(239, 68, 68, 0.6)',
-                            'rgba(249, 115, 22, 0.6)',
-                            'rgba(16, 185, 129, 0.6)'
+                            'rgba(239, 68, 68, 0.7)',
+                            'rgba(249, 115, 22, 0.7)',
+                            'rgba(8, 145, 178, 0.7)'
                         ],
-                        borderColor: [
-                            'rgba(239, 68, 68, 1)',
-                            'rgba(249, 115, 22, 1)',
-                            'rgba(16, 185, 129, 1)'
-                        ],
-                        borderWidth: 1
+                        borderRadius: 6,
+                        barThickness: window.innerWidth < 640 ? 20 : 35
                     }]
                 },
                 options: {
@@ -271,41 +289,12 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        x: {
-                            beginAtZero: true,
-                            max: 100,
-                            ticks: {
-                                callback: function(value) {
-                                    return value + '%'
-                                }
-                            }
-                        },
-                        y: {
-                            ticks: {
-                                font: {
-                                    size: window.innerWidth < 640 ? 12 : 14 // 依螢幕寬度縮放圖表字體
-                                }
-                            }
-                        }
+                        x: { beginAtZero: true, max: 100, display: false },
+                        y: { ticks: { font: { weight: 'bold', size: 14 } } }
                     },
                     plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed.x !== null) {
-                                        label += context.parsed.x + '%';
-                                    }
-                                    return label;
-                                }
-                            }
-                        }
+                        legend: { display: false },
+                        tooltip: { enabled: true }
                     }
                 }
             });
@@ -314,14 +303,18 @@
             const accordionContainer = document.getElementById('accordion-container');
             rulesData.forEach((rule, index) => {
                 const item = document.createElement('div');
-                item.classList.add('bg-white', 'rounded-xl', 'shadow-sm', 'overflow-hidden');
+                item.classList.add('bg-white', 'rounded-xl', 'shadow-sm', 'overflow-hidden', 'border', 'border-slate-100');
                 item.innerHTML = `
                     <div class="accordion-header flex justify-between items-center p-4 sm:p-5 cursor-pointer hover:bg-slate-50 transition-colors">
-                        <h4 class="font-bold text-base sm:text-lg text-cyan-800">${index + 1}. ${rule.title}</h4>
-                        <span class="accordion-icon text-2xl text-cyan-600 font-light transition-transform duration-300 transform">+</span>
+                        <h4 class="font-bold text-base sm:text-lg text-slate-700">
+                            <span class="text-cyan-600 mr-2">${index + 1}.</span>${rule.title}
+                        </h4>
+                        <span class="accordion-icon text-xl text-cyan-600 transition-transform duration-300">+</span>
                     </div>
                     <div class="accordion-content">
-                        <p class="p-4 sm:p-5 pt-0 text-slate-600 leading-relaxed text-sm sm:text-base">${rule.content}</p>
+                        <div class="p-4 sm:p-5 pt-0 text-slate-500 leading-relaxed text-sm sm:text-base border-t border-slate-50 mt-2 italic">
+                            ${rule.content}
+                        </div>
                     </div>
                 `;
                 accordionContainer.appendChild(item);
@@ -332,31 +325,23 @@
                 header.addEventListener('click', () => {
                     const content = header.nextElementSibling;
                     const icon = header.querySelector('.accordion-icon');
-                    
                     if (content.style.maxHeight) {
                         content.style.maxHeight = null;
                         icon.style.transform = 'rotate(0deg)';
                     } else {
-                        // Optional: close other accordions
                         document.querySelectorAll('.accordion-content').forEach(c => c.style.maxHeight = null);
                         document.querySelectorAll('.accordion-icon').forEach(i => i.style.transform = 'rotate(0deg)');
-                        
                         content.style.maxHeight = content.scrollHeight + "px";
                         icon.style.transform = 'rotate(45deg)';
                     }
                 });
             });
 
-            // 監聽視窗縮放以重新渲染圖表字體大小
             window.addEventListener('resize', () => {
-                 formatChart.options.scales.y.ticks.font.size = window.innerWidth < 640 ? 12 : 14;
+                 formatChart.options.datasets[0].barThickness = window.innerWidth < 640 ? 20 : 35;
                  formatChart.update();
             });
         });
     </script>
 </body>
 </html>
-
-
-
-
